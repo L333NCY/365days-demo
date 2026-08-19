@@ -1,1 +1,641 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>365DAYS Demo</title>
 
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#080c13;
+color:white
+}
+
+header{
+height:70px;
+background:#111722;
+border-bottom:1px solid #293242;
+display:flex;
+align-items:center;
+padding:0 24px;
+gap:35px
+}
+
+.logo{
+font-size:27px;
+font-weight:900
+}
+
+.logo span{
+color:#e53935
+}
+
+nav{
+display:flex;
+gap:25px
+}
+
+nav a{
+color:#aeb7c6;
+text-decoration:none;
+font-weight:bold
+}
+
+.auth{
+margin-left:auto
+}
+
+button{
+cursor:pointer
+}
+
+.login,.register{
+border:0;
+padding:11px 18px;
+border-radius:8px;
+font-weight:bold
+}
+
+.login{
+background:#202938;
+color:white
+}
+
+.register{
+background:#e53935;
+color:white;
+margin-left:7px
+}
+
+.container{
+max-width:1400px;
+margin:22px auto;
+padding:0 18px;
+display:grid;
+grid-template-columns:210px 1fr 320px;
+gap:18px
+}
+
+.panel{
+background:#111722;
+border:1px solid #293242;
+border-radius:14px
+}
+
+.sidebar{
+padding:16px;
+height:max-content
+}
+
+.sidebar h3{
+font-size:12px;
+color:#8994a6;
+text-transform:uppercase
+}
+
+.sport{
+padding:12px;
+border-radius:8px;
+color:#c6ceda;
+margin-bottom:5px
+}
+
+.sport.active,
+.sport:hover{
+background:#202938;
+color:white
+}
+
+.hero{
+background:linear-gradient(120deg,#182335,#111722);
+border:1px solid #293242;
+border-radius:14px;
+padding:28px;
+margin-bottom:20px
+}
+
+.hero small{
+color:#e53935;
+font-weight:bold
+}
+
+.hero h1{
+font-size:32px;
+margin:10px 0
+}
+
+.hero p{
+color:#9ba6b7
+}
+
+.match{
+padding:18px;
+margin-bottom:12px
+}
+
+.league{
+color:#8c98aa;
+font-size:12px;
+margin-bottom:13px
+}
+
+.teams{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-weight:bold
+}
+
+.vs{
+color:#687486;
+font-size:12px
+}
+
+.odds{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-top:15px
+}
+
+.odd{
+background:#202938;
+border:1px solid #303b4c;
+color:white;
+border-radius:8px;
+padding:11px
+}
+
+.odd:hover{
+border-color:#e53935
+}
+
+.odd span{
+display:block;
+font-size:11px;
+color:#929dad
+}
+
+.odd strong{
+font-size:15px
+}
+
+.slip{
+padding:18px;
+height:max-content;
+position:sticky;
+top:90px
+}
+
+.demo{
+color:#e6a23c;
+font-size:11px;
+margin-bottom:15px
+}
+
+.empty{
+text-align:center;
+color:#7d8899;
+padding:30px 8px
+}
+
+.selection{
+background:#1a2330;
+padding:12px;
+border-radius:8px;
+margin-bottom:8px
+}
+
+.selection-top{
+display:flex;
+justify-content:space-between;
+font-weight:bold
+}
+
+.selection small{
+color:#8c98aa
+}
+
+.remove{
+background:none;
+border:0;
+color:#e53935;
+margin-top:6px
+}
+
+.total{
+border-top:1px solid #293242;
+margin-top:15px;
+padding-top:12px
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+margin:9px 0;
+color:#adb7c6
+}
+
+.row strong{
+color:white
+}
+
+#stake{
+width:100%;
+padding:11px;
+background:#202938;
+border:1px solid #303b4c;
+border-radius:8px;
+color:white;
+margin:8px 0
+}
+
+.place{
+width:100%;
+padding:13px;
+border:0;
+border-radius:8px;
+background:#e53935;
+color:white;
+font-weight:900
+}
+
+.notice{
+text-align:center;
+font-size:10px;
+color:#707b8c;
+margin-top:10px;
+line-height:1.4
+}
+
+@media(max-width:950px){
+
+.container{
+grid-template-columns:180px 1fr
+}
+
+.slip{
+grid-column:1/-1;
+position:static
+}
+
+}
+
+@media(max-width:650px){
+
+nav{
+display:none
+}
+
+header{
+padding:0 14px
+}
+
+.container{
+display:block;
+padding:0 12px
+}
+
+.sidebar{
+display:flex;
+gap:5px;
+overflow-x:auto;
+margin-bottom:12px
+}
+
+.sidebar h3{
+display:none
+}
+
+.sport{
+white-space:nowrap
+}
+
+.hero h1{
+font-size:25px
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+365<span>DAYS</span>
+</div>
+
+<nav>
+<a href="#">Sports</a>
+<a href="#">Live</a>
+<a href="#">Promotions</a>
+</nav>
+
+<div class="auth">
+<button class="login">Hyr</button>
+<button class="register">Regjistrohu</button>
+</div>
+
+</header>
+
+<div class="container">
+
+<aside class="panel sidebar">
+
+<h3>Sportet</h3>
+
+<div class="sport active">⚽ Futboll</div>
+<div class="sport">🏀 Basketboll</div>
+<div class="sport">🎾 Tenis</div>
+<div class="sport">🏎️ Formula 1</div>
+<div class="sport">🥊 MMA</div>
+<div class="sport">🏐 Volejboll</div>
+
+</aside>
+
+<main>
+
+<section class="hero">
+
+<small>365DAYS DEMO</small>
+
+<h1>Sporti. Ndeshjet. Aksioni.</h1>
+
+<p>
+Platformë demonstrative sportive — koeficientë dhe balancë virtuale.
+</p>
+
+</section>
+
+<h2>⚡ Ndeshjet e sotme</h2>
+
+<div class="panel match">
+
+<div class="league">
+⚽ Premier League · 19:30
+</div>
+
+<div class="teams">
+<span>Manchester City</span>
+<span class="vs">VS</span>
+<span>Liverpool</span>
+</div>
+
+<div class="odds">
+
+<button class="odd" onclick="addBet('Manchester City','1',2.05)">
+<span>1</span>
+<strong>2.05</strong>
+</button>
+
+<button class="odd" onclick="addBet('Barazim','X',3.60)">
+<span>X</span>
+<strong>3.60</strong>
+</button>
+
+<button class="odd" onclick="addBet('Liverpool','2',3.10)">
+<span>2</span>
+<strong>3.10</strong>
+</button>
+
+</div>
+</div>
+
+
+<div class="panel match">
+
+<div class="league">
+⚽ La Liga · 21:00
+</div>
+
+<div class="teams">
+<span>Barcelona</span>
+<span class="vs">VS</span>
+<span>Real Madrid</span>
+</div>
+
+<div class="odds">
+
+<button class="odd" onclick="addBet('Barcelona','1',2.20)">
+<span>1</span>
+<strong>2.20</strong>
+</button>
+
+<button class="odd" onclick="addBet('Barazim','X',3.40)">
+<span>X</span>
+<strong>3.40</strong>
+</button>
+
+<button class="odd" onclick="addBet('Real Madrid','2',2.75)">
+<span>2</span>
+<strong>2.75</strong>
+</button>
+
+</div>
+</div>
+
+
+<div class="panel match">
+
+<div class="league">
+🎾 Tennis · 20:00
+</div>
+
+<div class="teams">
+<span>Player A</span>
+<span class="vs">VS</span>
+<span>Player B</span>
+</div>
+
+<div class="odds">
+
+<button class="odd" onclick="addBet('Player A','1',1.72)">
+<span>1</span>
+<strong>1.72</strong>
+</button>
+
+<button class="odd" onclick="addBet('Player B','2',2.10)">
+<span>2</span>
+<strong>2.10</strong>
+</button>
+
+<button class="odd" onclick="addBet('Over 22.5','O22.5',1.90)">
+<span>O22.5</span>
+<strong>1.90</strong>
+</button>
+
+</div>
+</div>
+
+</main>
+
+
+<aside class="panel slip">
+
+<h2>🎫 Kuponi</h2>
+
+<div class="demo">
+● DEMO — pa para reale
+</div>
+
+<div id="bets">
+<div class="empty">
+Zgjidh një koeficient për ta shtuar në kupon.
+</div>
+</div>
+
+<div class="total">
+
+<div class="row">
+<span>Koeficienti</span>
+<strong id="total">—</strong>
+</div>
+
+<div class="row">
+<span>Balanca virtuale</span>
+<strong>€1,000</strong>
+</div>
+
+<input id="stake" type="number" min="1" value="10">
+
+<div class="row">
+<span>Fitimi potencial</span>
+<strong id="profit">€0.00</strong>
+</div>
+
+<button class="place" onclick="placeBet()">
+VENDOS BAST DEMO
+</button>
+
+<div class="notice">
+Ky është vetëm prototip demonstrues.
+Nuk kryhen transaksione reale.
+</div>
+
+</div>
+
+</aside>
+
+</div>
+
+
+<script>
+
+let bets=[];
+
+function addBet(name,market,odds){
+
+bets.push({
+name:name,
+market:market,
+odds:odds
+});
+
+render();
+
+}
+
+function removeBet(index){
+
+bets.splice(index,1);
+
+render();
+
+}
+
+function render(){
+
+let box=document.getElementById("bets");
+
+if(bets.length===0){
+
+box.innerHTML=
+'<div class="empty">Zgjidh një koeficient për ta shtuar në kupon.</div>';
+
+document.getElementById("total").innerText="—";
+
+document.getElementById("profit").innerText="€0.00";
+
+return;
+
+}
+
+box.innerHTML=bets.map((b,i)=>`
+
+<div class="selection">
+
+<div class="selection-top">
+
+<span>${b.name}</span>
+
+<strong>${b.odds.toFixed(2)}</strong>
+
+</div>
+
+<small>Rezultat: ${b.market}</small>
+
+<br>
+
+<button class="remove" onclick="removeBet(${i})">
+Hiq
+</button>
+
+</div>
+
+`).join("");
+
+calculate();
+
+}
+
+function calculate(){
+
+if(!bets.length)return;
+
+let total=bets.reduce(
+(a,b)=>a*b.odds,
+1
+);
+
+let stake=
+parseFloat(document.getElementById("stake").value)||0;
+
+document.getElementById("total").innerText=
+total.toFixed(2);
+
+document.getElementById("profit").innerText=
+"€"+(stake*total).toFixed(2);
+
+}
+
+document.getElementById("stake").addEventListener(
+"input",
+calculate
+);
+
+function placeBet(){
+
+if(!bets.length){
+
+alert("Zgjidh një koeficient.");
+
+return;
+
+}
+
+alert(
+"Basti DEMO u regjistrua me sukses. Nuk u përdorën para reale."
+);
+
+}
+
+</script>
+
+</body>
+</html>
